@@ -48,26 +48,26 @@
                     tools:ignore="MissingConstraints"
                     android:text="Riwayat Penjualan"
                     android:textColor="@color/black"
-                    android:textSize="22sp"
+                    android:textSize="@dimen/_12ssp"
                     android:textAlignment="center"
                     android:fontFamily="@font/lato_bold"
                     android:layout_margin="5dp"/>
 
                 <EditText
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="@dimen/_30sdp"
                     tools:ignore="MissingConstraints"
-                    android:paddingLeft="15dp"
-                    android:paddingRight="15dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="15dp"
-                    android:layout_marginBottom="10dp"
+                    android:paddingLeft="@dimen/_8sdp"
+                    android:paddingRight="@dimen/_8sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginLeft="@dimen/_5sdp"
+                    android:layout_marginRight="@dimen/_5sdp"
+                    android:layout_marginBottom="@dimen/_8sdp"
                     android:hint="Cari Nomor Invoice "
                     android:background="@drawable/search_box"
                     android:ems="10"
                     android:id="@+id/textSearch"
-                    android:textSize="16sp"
+                    android:textSize="@dimen/_10ssp"
                     android:textColor="@color/black"
                     android:textColorHint="@color/black"
                     android:minHeight="40dp"
@@ -110,7 +110,7 @@
                         tools:ignore="MissingConstraints"
                         android:text="Daftar Item Terjual"
                         android:textColor="@color/black"
-                        android:textSize="22sp"
+                        android:textSize="@dimen/_12ssp"
                         android:id="@+id/textTitleDetailSales"
                         android:textAlignment="center"
                         android:fontFamily="@font/lato_bold"
@@ -133,7 +133,7 @@
                             android:text="Name"
                             android:textAlignment="center"
                             android:textColor="@color/black"
-                            android:textSize="16sp"
+                            android:textSize="@dimen/_10ssp"
                             android:fontFamily="@font/lato_bold" />
 
                         <TextView
@@ -143,7 +143,7 @@
                             android:text="Qty"
                             android:textAlignment="center"
                             android:textColor="@color/black"
-                            android:textSize="16sp"
+                            android:textSize="@dimen/_10ssp"
                             android:fontFamily="@font/lato_bold"/>
 
                         <TextView
@@ -153,7 +153,7 @@
                             android:text="Price"
                             android:textAlignment="center"
                             android:textColor="@color/black"
-                            android:textSize="16sp"
+                            android:textSize="@dimen/_10ssp"
                             android:fontFamily="@font/lato_bold"/>
 
                     </LinearLayout>
@@ -186,7 +186,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="Total Sales "
                                 android:textColor="@color/black"
-                                android:textSize="9pt"
+                                android:textSize="@dimen/_11ssp"
                                 app:layout_constraintTop_toTopOf="parent"
                                 app:layout_constraintLeft_toLeftOf="parent"
                                 android:layout_marginLeft="15dp"
@@ -202,7 +202,7 @@
                                 android:text="Rp. 0"
                                 android:textColor="@color/black"
                                 android:fontFamily="@font/lato_regular"
-                                android:textSize="9pt"
+                                android:textSize="@dimen/_11ssp"
                                 android:textStyle="bold"
                                 android:id="@+id/textTotalSales"/>
 
@@ -213,12 +213,12 @@
                                 android:text="Cetak Ulang Struk "
                                 android:backgroundTint="@color/blue"
                                 android:textColor="@color/backgroundColorWhite"
-                                android:textSize="22sp"
+                                android:textSize="@dimen/_12ssp"
                                 app:layout_constraintTop_toBottomOf="@+id/textTotalSales"
                                 android:id="@+id/btnReprint"
                                 android:textAllCaps="false"
-                                android:layout_margin="5dp"
-                                android:padding="8dp"/>
+                                android:layout_margin="@dimen/_5sdp"
+                                android:padding="@dimen/_6sdp"/>
 
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
