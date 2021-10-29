@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/textNamaKategori"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Nama Category "
+        tools:ignore="MissingConstraints"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:fontFamily="@font/lato_regular"
+        android:textColor="@color/black"
+        android:padding="@dimen/_2sdp"
+        android:background="@color/white"
+        android:textSize="@dimen/_9ssp"/>
+
+    <TextView
+        android:id="@+id/textHarga"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/textNamaKategori"
+        app:layout_constraintLeft_toLeftOf="@id/textNamaKategori"
+        android:fontFamily="@font/lato_regular"
+        android:textColor="@color/black"
+        android:text="1"
+        android:layout_marginLeft="@dimen/_2sdp"
+        android:textSize="@dimen/_9ssp"/>
+
+    <TextView
+        android:id="@+id/textTotal"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/textHarga"
+        app:layout_constraintRight_toRightOf="parent"
+        android:fontFamily="@font/lato_regular"
+        android:layout_marginRight="@dimen/_4sdp"
+        android:textColor="@color/black"
+        android:text="1"
+        android:textStyle="bold"
+        android:textSize="@dimen/_9ssp"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

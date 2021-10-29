@@ -309,16 +309,36 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
-                <TextView
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Daftar Keranjang"
-                    android:layout_margin="10dp"
-                    android:id="@+id/textTotalCart"
-                    android:textColor="@color/black"
-                    android:textStyle="bold"
-                    android:textSize="@dimen/_12ssp"
-                    android:fontFamily="@font/lato_bold"/>
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="Daftar Keranjang"
+                        android:layout_margin="10dp"
+                        android:id="@+id/textTotalCart"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"
+                        android:textSize="@dimen/_11ssp"
+                        android:fontFamily="@font/lato_bold"/>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnClear"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/_30sdp"
+                        android:text="Hapus keranjang"
+                        android:backgroundTint="@color/red"
+                        android:fontFamily="@font/lato_bold"
+                        android:textAllCaps="false"
+                        android:textSize="@dimen/_8ssp"
+                        android:layout_gravity="end|center_vertical"/>
+
+                </LinearLayout>
+
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -332,15 +352,15 @@
                         android:padding="5dp">
 
                         <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1.8"
                             android:id="@+id/textNameItem"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/_11ssp"
-                            android:textStyle="bold"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1.8"
                             android:text="Nama Item"
-                            android:textAlignment="center"/>
+                            android:textAlignment="center"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_10ssp"
+                            android:textStyle="bold" />
 
                         <TextView
                             android:layout_width="0dp"
@@ -350,7 +370,7 @@
                             android:textColor="@color/black"
                             android:textAlignment="center"
                             android:gravity="end"
-                            android:textSize="@dimen/_11ssp"
+                            android:textSize="@dimen/_10ssp"
                             android:textStyle="bold"
                             android:text="Jumlah"
                             tools:ignore="RtlCompat" />
@@ -363,7 +383,7 @@
                             android:textColor="@color/black"
                             android:textAlignment="center"
                             android:gravity="end"
-                            android:textSize="@dimen/_11ssp"
+                            android:textSize="@dimen/_10ssp"
                             android:textStyle="bold"
                             android:text="Harga Satuan"
                             tools:ignore="RtlCompat" />
@@ -381,15 +401,7 @@
 
                 </androidx.recyclerview.widget.RecyclerView>
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnClear"
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/_30sdp"
-                    android:text="Hapus keranjang"
-                    android:backgroundTint="@color/red"
-                    android:fontFamily="@font/lato_bold"
-                    android:textAllCaps="false"
-                    android:textSize="@dimen/_8ssp"/>
+
 
                 <LinearLayout
                     android:layout_width="match_parent"

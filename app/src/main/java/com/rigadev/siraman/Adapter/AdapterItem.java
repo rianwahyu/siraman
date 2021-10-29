@@ -76,7 +76,7 @@ public class AdapterItem extends RecyclerView.Adapter<AdapterItem.ViewHolder> {
         viewHolder.cardItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //if (clickListener != null) clickListener.onClick(v, position);
+                if (clickListener != null) clickListener.onClick(v, position);
                 //viewItem(barcode,name,stock,price, v);
                 //((HomeFragment)fragment).viewItem(barcode, name, stock, price, v, subCategory, aliasName);
 

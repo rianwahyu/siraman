@@ -1,4 +1,4 @@
-package com.rigadev.siraman.ui.gallery;
+package com.rigadev.siraman.ui.riwayat;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,7 +14,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.rigadev.siraman.R;
 
-public class GalleryFragment extends Fragment {
+public class RiwayatFragment extends Fragment {
 
     private GalleryViewModel galleryViewModel;
 
@@ -22,7 +22,7 @@ public class GalleryFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         galleryViewModel =
                 new ViewModelProvider(this).get(GalleryViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_gallery, container, false);
+        View root = inflater.inflate(R.layout.fragment_riwayat, container, false);
         final TextView textView = root.findViewById(R.id.text_gallery);
         galleryViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override

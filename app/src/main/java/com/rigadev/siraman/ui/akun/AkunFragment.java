@@ -1,4 +1,4 @@
-package com.rigadev.siraman.ui.slideshow;
+package com.rigadev.siraman.ui.akun;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,7 +14,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.rigadev.siraman.R;
 
-public class SlideshowFragment extends Fragment {
+public class AkunFragment extends Fragment {
 
     private SlideshowViewModel slideshowViewModel;
 
@@ -22,7 +22,7 @@ public class SlideshowFragment extends Fragment {
                              ViewGroup container, Bundle savedInstanceState) {
         slideshowViewModel =
                 new ViewModelProvider(this).get(SlideshowViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_slideshow, container, false);
+        View root = inflater.inflate(R.layout.fragment_akun, container, false);
         final TextView textView = root.findViewById(R.id.text_slideshow);
         slideshowViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override

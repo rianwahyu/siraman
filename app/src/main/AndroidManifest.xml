@@ -32,6 +32,13 @@
         android:largeHeap="true"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".ui.PembayaranActivity"
+            android:label="@string/title_activity_home"
+            android:theme="@style/Theme.Siraman.NoActionBar"
+            android:screenOrientation="sensorLandscape"
+            android:windowSoftInputMode="stateAlwaysHidden"
+            tools:ignore="LockedOrientationActivity"/>
+        <activity
             android:name=".HomeActivity"
             android:label="@string/title_activity_home"
             android:theme="@style/Theme.Siraman.NoActionBar"
