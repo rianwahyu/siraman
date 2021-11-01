@@ -11,6 +11,8 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -61,12 +63,16 @@ public class ClosingCafeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
         binding = DataBindingUtil.setContentView(this, R.layout.activity_closing_cafe);
 
         listCart = new ArrayList<>();
 
-        gerai = "Siraman";
-        stores = "Cafe & Car Wash";
+        /*gerai = "Siraman";
+        stores = "Cafe & Car Wash";*/
 
         Bundle extras = getIntent().getExtras();
         if (extras != null)
@@ -98,7 +104,7 @@ public class ClosingCafeActivity extends AppCompatActivity {
         });
 
         binding.textUsername.setText(new SessionLogin(context).getUsername());
-        binding.textGerai.setText(gerai);
+//        binding.textGerai.setText(gerai);
         binding.textCurentDate.setText(MyConfig.getCurentDate());
 
         rcSetting();
@@ -208,10 +214,9 @@ public class ClosingCafeActivity extends AppCompatActivity {
         AsyncEscPosPrinter printer = new AsyncEscPosPrinter(printerConnection, 203, 48f, 32);
 
         textPrint = textPrint + "[C]<font size='big'>Cafe</font>\n" +
-                "[C]<font size='big'>Depo Bangunan</font>\n\n" +
-                "[C]<font size='normal'>PT. Megadepo Indonesia</font>\n"+
-                "[C]<font size='normal'>Closing Penjualan Cafe</font>\n\n\n"+
-                "[L]<font size='normal'>Gerai : "+gerai+"</font>\n"+
+                "[C]<font size='big'>Siraman</font>\n\n" +
+                "[C]<font size='normal'>Car Wash & Caffee</font>\n\n\n"+
+
                 "[L]<font size='normal'>Kasir : "+new SessionLogin(context).getUsername()+"</font>\n"+
                 "[L]<font size='normal'>Tanggal : "+MyConfig.getCurentDate()+"</font>\n"+
 
@@ -230,7 +235,7 @@ public class ClosingCafeActivity extends AppCompatActivity {
         textPrint = textPrint + "[L]==============================\n "+
                 "[L].[R]\n" +
                 "[L]Total[R]"+MyConfig.formatNumberComma(String.valueOf(sumTotals2))+"\n" +
-                "[L]<font size='normal'>Develop By : IT Depo Bangunan</font>\n" +
+                "[L]<font size='normal'>Develop By : Rigadev</font>\n" +
                 "[L]\n" ;
 
         return printer.setTextToPrint(textPrint);

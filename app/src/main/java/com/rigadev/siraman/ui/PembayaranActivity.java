@@ -11,6 +11,8 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -65,6 +67,10 @@ public class PembayaranActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //setContentView(R.layout.activity_pembayaran);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
         binding = DataBindingUtil.setContentView(this, R.layout.activity_pembayaran);
 
         username = getIntent().getStringExtra("username");
@@ -78,7 +84,7 @@ public class PembayaranActivity extends AppCompatActivity {
         stores = "Siraman";
 
 
-        binding.textGerai.setText(gerai);
+        //binding.textGerai.setText(gerai);
         binding.textInvoice.setText(invoice);
         binding.textUsername.setText(username);
         binding.textTanggal.setText(MyConfig.getCurentDate());
@@ -220,9 +226,8 @@ public class PembayaranActivity extends AppCompatActivity {
 
         textPrint = textPrint + "[C]<font size='big'>Cafe</font>\n" +
                 "[C]<font size='big'>Siraman</font>\n\n" +
-                "[C]<font size='normal'></font>\n"+
+                "[C]<font size='normal'>Car Wash & Caffee</font>\n"+
                 "[C]<font size='normal'>Struk Pembayaran</font>\n\n\n"+
-                "[L]<font size='normal'>Gerai : "+gerai+"</font>\n"+
                 "[L]<font size='normal'>Invoice : "+invoice+"</font>\n"+
                 "[L]<font size='normal'>Kasir : "+username+"</font>\n"+
                 "[C]<u type='double'>" + format.format(new Date()) + "</u>\n" +
@@ -243,7 +248,7 @@ public class PembayaranActivity extends AppCompatActivity {
                 "[L]Dibayarkan[R]"+MyConfig.formatNumberComma(paidValue)+"\n" +
                 "[L]Kembalian[R]"+MyConfig.formatNumberComma(returnPays)+"\n\n" +
 
-                "[C]<font size='normal'>Terima Kasih berkunjung</font>\n\n" +
+                "[C]<font size='normal'>Terima Kasih telah berkunjung</font>\n\n" +
                 "[L]<font size='normal'>Develop By : Rigadev</font>\n" +
                 "[L]\n" ;
 

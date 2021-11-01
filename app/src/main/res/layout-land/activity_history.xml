@@ -3,6 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -21,13 +22,15 @@
             app:layout_constraintTop_toTopOf="@+id/cardStruk"
             tools:ignore="MissingConstraints"
             app:layout_constraintLeft_toRightOf="@+id/cardStruk"
-            android:layout_marginLeft="20dp">
+            android:layout_marginLeft="@dimen/_10sdp"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginRight="@dimen/_10sdp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:padding="50dp">
+                android:padding="@dimen/_20sdp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -35,7 +38,7 @@
                     android:text="Pengaturan cetak struk"
                     android:fontFamily="@font/lato_regular"
                     android:textColor="@color/black"
-                    android:textSize="16sp"/>
+                    android:textSize="@dimen/_12ssp"/>
 
                 <Button
                     android:id="@+id/btnPilihPerangkat"
@@ -45,22 +48,25 @@
                     android:backgroundTint="@color/blue"
                     android:fontFamily="@font/lato_regular"
                     android:textAllCaps="false"
-                    android:padding="10dp"
+                    android:padding="@dimen/_8sdp"
                     android:textColor="@color/white"
                     android:layout_gravity="center"
-                    android:layout_marginTop="40dp"/>
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:textSize="@dimen/_10ssp"/>
 
                 <Button
                     android:id="@+id/btnCetakStruk"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Cetak Struk"
                     android:backgroundTint="@color/blue"
                     android:fontFamily="@font/lato_regular"
                     android:textAllCaps="false"
-                    android:padding="10dp"
+                    android:padding="@dimen/_8sdp"
                     android:textColor="@color/white"
-                    android:layout_marginTop="10dp"/>
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_gravity="center"
+                    android:textSize="@dimen/_10ssp"/>
 
             </LinearLayout>
 
@@ -78,8 +84,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintDimensionRatio="1:1.8"
             app:layout_constraintWidth_percent="0.3"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp">
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_10sdp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -91,30 +97,30 @@
                     android:layout_height="wrap_content"
                     android:text="Preview Struk"
                     android:fontFamily="@font/lato_regular"
-                    android:layout_margin="10dp"/>
+                    android:layout_margin="@dimen/_5sdp"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Cafe Depo Bangunan"
+                    android:text="Siraman"
                     android:fontFamily="@font/lato_bold"
                     android:textColor="@color/black"
                     android:layout_gravity="center"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="8dp"
-                    android:textSize="18sp"/>
+                    android:layout_marginTop="@dimen/_2sdp"
+                    android:layout_marginBottom="@dimen/_2sdp"
+                    android:textSize="@dimen/_14sdp"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="PT. Megadepo Indonesia"
+                    android:text="Car Wash &amp; Caffee"
                     android:fontFamily="@font/lato_regular"
                     android:textColor="@color/black"
                     android:layout_gravity="center"
                     android:layout_marginBottom="8dp"
-                    android:textSize="15sp"/>
+                    android:textSize="@dimen/_12ssp"/>
 
-                <LinearLayout
+                <!--<LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
@@ -138,22 +144,22 @@
                         android:layout_marginLeft="5dp"
                         android:text=""/>
 
-                </LinearLayout>
+                </LinearLayout>-->
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:layout_marginLeft="4dp"
-                    android:layout_marginRight="4dp"
-                    android:padding="2dp">
+                    android:layout_marginLeft="@dimen/_2sdp"
+                    android:layout_marginRight="@dimen/_2sdp"
+                    android:padding="@dimen/_1sdp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/lato_regular"
                         android:text="Kasir "
-                        />
+                        android:textSize="@dimen/_10ssp"/>
 
                     <TextView
                         android:id="@+id/textUsername"
@@ -161,8 +167,9 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/lato_regular"
                         android:textColor="@color/black"
-                        android:layout_marginLeft="5dp"
-                        android:text=""/>
+                        android:layout_marginLeft="@dimen/_2sdp"
+                        android:text=""
+                        android:textSize="@dimen/_10ssp"/>
 
                 </LinearLayout>
 
@@ -170,16 +177,16 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:layout_marginLeft="4dp"
-                    android:layout_marginRight="4dp"
-                    android:padding="2dp">
+                    android:layout_marginLeft="@dimen/_2sdp"
+                    android:layout_marginRight="@dimen/_2sdp"
+                    android:padding="@dimen/_1sdp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/lato_regular"
-                        android:text="No Receive : "
-                        />
+                        android:text="No Invoice : "
+                        android:textSize="@dimen/_10sdp"/>
 
                     <TextView
                         android:id="@+id/textInvoice"
@@ -187,8 +194,9 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/lato_regular"
                         android:textColor="@color/black"
-                        android:layout_marginLeft="5dp"
-                        android:text=""/>
+                        android:layout_marginLeft="@dimen/_2sdp"
+                        android:text=""
+                        android:textSize="@dimen/_10ssp"/>
 
                 </LinearLayout>
 
@@ -196,16 +204,16 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:layout_marginLeft="4dp"
-                    android:layout_marginRight="4dp"
-                    android:padding="2dp">
+                    android:layout_marginLeft="@dimen/_2sdp"
+                    android:layout_marginRight="@dimen/_2sdp"
+                    android:padding="@dimen/_1sdp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/lato_regular"
                         android:text="Tanggal : "
-                        />
+                        android:textSize="@dimen/_10sdp"/>
 
                     <TextView
                         android:id="@+id/textTanggal"
@@ -213,8 +221,9 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/lato_regular"
                         android:textColor="@color/black"
-                        android:layout_marginLeft="5dp"
-                        android:text=""/>
+                        android:layout_marginLeft="@dimen/_2sdp"
+                        android:text=""
+                        android:textSize="@dimen/_10ssp"/>
 
                 </LinearLayout>
 
@@ -222,9 +231,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:background="#C1BEBE"
-                    android:layout_marginLeft="3dp"
-                    android:layout_marginRight="3dp"
-                    android:layout_marginTop="4dp"/>
+                    android:layout_marginLeft="@dimen/_1sdp"
+                    android:layout_marginRight="@dimen/_1sdp"
+                    android:layout_marginTop="@dimen/_2sdp"/>
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rcListOrder"
@@ -236,24 +245,24 @@
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:background="#C1BEBE"
-                    android:layout_marginLeft="3dp"
-                    android:layout_marginRight="3dp"
-                    android:layout_marginTop="4dp"/>
+                    android:layout_marginLeft="@dimen/_1sdp"
+                    android:layout_marginRight="@dimen/_1sdp"
+                    android:layout_marginTop="@dimen/_2sdp"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:layout_marginLeft="4dp"
-                    android:layout_marginRight="4dp"
-                    android:padding="2dp">
+                    android:layout_marginLeft="@dimen/_2sdp"
+                    android:layout_marginRight="@dimen/_2sdp"
+                    android:padding="@dimen/_1sdp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/lato_regular"
                         android:text="Total Bayar : "
-                        />
+                        android:textSize="@dimen/_10sdp"/>
 
                     <TextView
                         android:id="@+id/textTotal"
@@ -265,7 +274,7 @@
                         android:text="abc"
                         android:gravity="end"
                         android:layout_gravity="end"
-                        android:textSize="16sp"/>
+                        android:textSize="@dimen/_10ssp"/>
 
                 </LinearLayout>
 
@@ -273,16 +282,16 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:layout_marginLeft="4dp"
-                    android:layout_marginRight="4dp"
-                    android:padding="2dp">
+                    android:layout_marginLeft="@dimen/_2sdp"
+                    android:layout_marginRight="@dimen/_2sdp"
+                    android:padding="@dimen/_1sdp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/lato_regular"
                         android:text="Dibayar : "
-                        />
+                        android:textSize="@dimen/_10sdp"/>
 
                     <TextView
                         android:id="@+id/textDibayar"
@@ -294,7 +303,7 @@
                         android:text="abc"
                         android:gravity="end"
                         android:layout_gravity="end"
-                        android:textSize="16sp"/>
+                        android:textSize="@dimen/_11ssp"/>
 
                 </LinearLayout>
 
@@ -302,16 +311,17 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:layout_marginLeft="4dp"
-                    android:layout_marginRight="4dp"
-                    android:padding="2dp">
+                    android:layout_marginLeft="@dimen/_2sdp"
+                    android:layout_marginRight="@dimen/_2sdp"
+                    android:padding="@dimen/_1sdp"
+                    android:layout_marginBottom="@dimen/_2sdp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/lato_regular"
                         android:text="Kembali : "
-                        />
+                        android:textSize="@dimen/_10sdp"/>
 
                     <TextView
                         android:id="@+id/textKembalian"
@@ -323,7 +333,7 @@
                         android:text="abc"
                         android:gravity="end"
                         android:layout_gravity="end"
-                        android:textSize="16sp"/>
+                        android:textSize="@dimen/_11ssp"/>
 
                 </LinearLayout>
 

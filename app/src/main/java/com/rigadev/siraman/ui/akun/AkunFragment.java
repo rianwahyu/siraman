@@ -175,6 +175,34 @@ public class AkunFragment extends Fragment {
                     String totalSales = String.valueOf(sumTotals2);
 
                     binding.textTotalSalesClosing.setText("Rp. " + MyConfig.formatNumberComma(totalSales));
+
+                    binding.btnReprintClosing.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            //dialogPrintClosing();
+                            new IonAlert(getContext(), IonAlert.WARNING_TYPE)
+                                    .setTitleText("Closing Cafe")
+                                    .setContentText("Apakah anda ingin melakukan closing penjualan cafe ")
+                                    .setCancelText("Tidak")
+                                    .setConfirmText("Ya")
+                                    .showCancelButton(true)
+                                    .setCancelClickListener(new IonAlert.ClickListener() {
+                                        @Override
+                                        public void onClick(IonAlert sDialog) {
+                                            sDialog.cancel();
+                                        }
+                                    })
+                                    .setConfirmClickListener(new IonAlert.ClickListener() {
+                                        @Override
+                                        public void onClick(IonAlert ionAlert) {
+                                            ionAlert.dismiss();
+                                            updateCLosing();
+                                        }
+                                    })
+                                    .show();
+                        }
+                    });
+
                 }else{
 
                 }
