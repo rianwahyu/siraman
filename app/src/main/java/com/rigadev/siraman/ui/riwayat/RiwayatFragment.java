@@ -273,13 +273,11 @@ public class RiwayatFragment extends Fragment implements ItemClickListener {
                                     sumTotals +=parseTotal;
 
                                 }
+                                adapterValue.notifyDataSetChanged();
                             } catch (JSONException e) {
                                 Log.e("catchException",e.toString());
                                 e.printStackTrace();
                             }
-
-
-                            adapterValue.notifyDataSetChanged();
 
                             String totalSales = String.valueOf(sumTotals);
 

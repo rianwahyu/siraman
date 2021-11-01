@@ -299,7 +299,6 @@ public class HomeFragment extends Fragment implements ItemClickListener, ItemDel
             }
         });
 
-
     }
 
     private void initRC() {
@@ -522,7 +521,6 @@ public class HomeFragment extends Fragment implements ItemClickListener, ItemDel
             @SuppressLint("RestrictedApi")
             @Override
             public void onClick(View v) {
-
                 MaterialDialog mDialog = new MaterialDialog.Builder(getActivity())
                         .setTitle("Hapus data keranjang")
                         .setMessage("Apakah anda ingin menghapus semua daftar keranjang/belanja ?")

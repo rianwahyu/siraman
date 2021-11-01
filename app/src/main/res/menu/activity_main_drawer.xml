@@ -9,11 +9,11 @@
             android:icon="@drawable/ic_home_black"
             android:title="Beranda" />
         <item
-            android:id="@+id/nav_gallery"
+            android:id="@+id/nav_riwayat"
             android:icon="@drawable/ic_history_black"
-            android:title="Riwayat" />
+            android:title="Riwayat Harian" />
         <item
-            android:id="@+id/nav_slideshow"
+            android:id="@+id/nav_akun"
             android:icon="@drawable/ic_user"
             android:title="Akun" />
     </group>

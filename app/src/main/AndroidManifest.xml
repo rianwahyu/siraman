@@ -33,6 +33,14 @@
         android:usesCleartextTraffic="true">
 
         <activity
+            android:name=".ui.ClosingCafeActivity"
+            android:label="@string/title_activity_home"
+            android:theme="@style/Theme.Siraman.NoActionBar"
+            android:screenOrientation="sensorLandscape"
+            android:windowSoftInputMode="stateAlwaysHidden"
+            tools:ignore="LockedOrientationActivity"/>
+
+        <activity
             android:name=".ui.HistoryActivity"
             android:label="@string/title_activity_home"
             android:theme="@style/Theme.Siraman.NoActionBar"

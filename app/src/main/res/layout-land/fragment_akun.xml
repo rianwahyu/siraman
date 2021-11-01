@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:ignore="MissingDefaultResource"
+        tools:context=".MainActivity"
+        android:background="#FAF7F7">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:ignore="MissingConstraints"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    android:layout_margin="@dimen/_5sdp"
+                    android:elevation="@dimen/_8sdp"
+                    android:id="@+id/cardClosing">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:id="@+id/linearCard3">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:text="Rekapan Harian"
+                            android:textColor="@color/black"
+                            android:textStyle="bold"
+                            android:textSize="@dimen/_16ssp"
+                            android:padding="@dimen/_18sdp"
+                            android:fontFamily="@font/lato_bold"/>
+
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:ignore="MissingConstraints"
+                    app:layout_constraintTop_toBottomOf="@+id/cardClosing"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    android:layout_margin="@dimen/_5sdp"
+                    android:elevation="@dimen/_8sdp"
+                    android:id="@+id/cardLogout">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:id="@+id/linearCardClosing">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:text="Logout"
+                            android:textColor="@color/black"
+                            android:textStyle="bold"
+                            android:textSize="@dimen/_16ssp"
+                            android:padding="@dimen/_18sdp"
+                            android:fontFamily="@font/lato_bold"/>
+
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/colorTextGrey"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"/>
+
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:background="@color/backgroundColorWhite">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="4dp"
+                    android:orientation="vertical"
+                    android:id="@+id/linearClosing"
+                    android:visibility="visible">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="0.25"
+                        tools:ignore="MissingConstraints,RtlCompat"
+                        android:text="Daftar Total Barang Terjual Harian"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_15ssp"
+                        android:id="@+id/textTitleDetailSalesClosing"
+                        android:textAlignment="center"
+                        android:layout_gravity="center_vertical"
+                        android:gravity="center_vertical"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="0.25"
+                        tools:ignore="MissingConstraints"
+                        android:orientation="horizontal"
+                        app:layout_constraintTop_toBottomOf="@id/textTitleDetailSalesClosing"
+                        android:layout_marginTop="2dp"
+                        android:id="@+id/linearHeaderClosing">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Barcode"
+                            android:textAlignment="textStart"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_11ssp"
+                            android:fontFamily="@font/lato_regular"
+                            android:textStyle="bold"
+                            android:id="@+id/textInvoiceClosing"/>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2"
+                            android:text="Name"
+                            android:textAlignment="textStart"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_11ssp"
+                            android:fontFamily="@font/lato_regular"
+                            android:textStyle="bold"
+                            android:id="@+id/textNameItemClosing"/>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.5"
+                            android:text="Qty"
+                            android:textAlignment="center"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_11ssp"
+                            android:fontFamily="@font/lato_regular"
+                            android:textStyle="bold"
+                            android:id="@+id/textQtyClosing"/>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Price"
+                            android:textAlignment="center"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_11ssp"
+                            android:fontFamily="@font/lato_regular"
+                            android:textStyle="bold"
+                            android:id="@+id/textPriceItemClosing"
+                            />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Total"
+                            android:textAlignment="center"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_11ssp"
+                            android:fontFamily="@font/lato_regular"
+                            android:textStyle="bold"
+                            android:layout_marginTop="3dp"
+                            android:id="@+id/textTotalItemClosing"/>
+
+                    </LinearLayout>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="2"
+                        tools:ignore="MissingConstraints"
+                        app:layout_constraintTop_toBottomOf="@+id/linearHeader"
+                        android:id="@+id/recycleValueClosing"
+                        app:layout_constraintBottom_toTopOf="@+id/frameValue">
+
+                    </androidx.recyclerview.widget.RecyclerView>
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="0.6"
+                        tools:ignore="MissingConstraints"
+                        app:layout_constraintBottom_toBottomOf="parent">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Total"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/_13ssp"
+                                android:fontFamily="@font/lato_regular"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintLeft_toLeftOf="parent"
+                                android:layout_marginLeft="@dimen/_8sdp"
+                                android:id="@+id/titleTotalSalesClosing"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintRight_toRightOf="parent"
+                                android:layout_marginRight="@dimen/_8sdp"
+                                android:text="Rp. 0"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/_13ssp"
+                                android:fontFamily="@font/lato_regular"                                android:textStyle="bold"
+                                android:id="@+id/textTotalSalesClosing"/>
+
+                            <Button
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_35sdp"
+                                android:text="Ganti Shift dan Cetak Rekapan harian "
+                                android:backgroundTint="@color/blue"
+                                android:textColor="@color/backgroundColorWhite"
+                                android:textSize="@dimen/_12ssp"
+                                android:fontFamily="@font/lato_regular"
+                                app:layout_constraintTop_toBottomOf="@+id/textTotalSalesClosing"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                android:layout_marginBottom="@dimen/_5sdp"
+                                android:id="@+id/btnReprintClosing"
+                                android:textAllCaps="false"
+                                android:layout_marginLeft="@dimen/_10sdp"
+                                android:layout_marginRight="@dimen/_10sdp"/>
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </FrameLayout>
+
+                </LinearLayout>
+
+            </FrameLayout>
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
