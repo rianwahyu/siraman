@@ -37,12 +37,22 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.forms.sti.progresslitieigb.ProgressLoadingJIGB;
 import com.rigadev.siraman.Adapter.AdapterCart;
+import com.rigadev.siraman.Adapter.AdapterCategoryCoffee;
+import com.rigadev.siraman.Adapter.AdapterCategoryCuci;
 import com.rigadev.siraman.Adapter.AdapterItem;
+import com.rigadev.siraman.Adapter.AdapterItem2;
 import com.rigadev.siraman.Model.DataCart;
+import com.rigadev.siraman.Model.DataCategory;
+import com.rigadev.siraman.Model.DataCategory2;
 import com.rigadev.siraman.Model.DataItem;
+import com.rigadev.siraman.Model.DataItem2;
 import com.rigadev.siraman.R;
 import com.rigadev.siraman.databinding.FragmentHomeBinding;
+import com.rigadev.siraman.ui.KeranjangActivity;
 import com.rigadev.siraman.ui.PembayaranActivity;
+import com.rigadev.siraman.util.ItemCategoryCoffeeListener;
+import com.rigadev.siraman.util.ItemCategoryListener;
+import com.rigadev.siraman.util.ItemClickCoffeeListener;
 import com.rigadev.siraman.util.ItemClickListener;
 import com.rigadev.siraman.util.ItemDeleteCartListener;
 import com.rigadev.siraman.util.ItemQtyCartListener;
@@ -71,14 +81,21 @@ import java.util.Map;
 
 import id.ionbit.ionalert.IonAlert;
 
-public class HomeFragment extends Fragment implements ItemClickListener, ItemDeleteCartListener, ItemQtyCartListener {
+public class HomeFragment extends Fragment implements ItemClickListener, ItemDeleteCartListener,
+        ItemQtyCartListener, ItemCategoryListener, ItemCategoryCoffeeListener, ItemClickCoffeeListener {
 
     FragmentHomeBinding binding;
     private List<DataItem> listItem = new ArrayList<DataItem>();
     private List<DataCart> listCart = new ArrayList<DataCart>();
+    private List<DataCategory> listCategory = new ArrayList<DataCategory>();
+    private List<DataCategory2> listCategory2 = new ArrayList<DataCategory2>();
+    private List<DataItem2> listItem2 = new ArrayList<DataItem2>();
 
     AdapterItem adapteritem;
+    AdapterItem2 adapterItem2;
     AdapterCart adapterCart;
+    AdapterCategoryCuci adapterCategoryCuci;
+    AdapterCategoryCoffee adapterCategoryCoffee;
     int numberOfColumns = 4;
 
     Integer sumTotals=0;
@@ -93,6 +110,8 @@ public class HomeFragment extends Fragment implements ItemClickListener, ItemDel
     EditText temp;
 
     SQLiteHelpers sqLiteHelpers;
+    String subCategoryCuci="";
+    String subCategoryCaffee="";
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -111,12 +130,21 @@ public class HomeFragment extends Fragment implements ItemClickListener, ItemDel
 
         binding.shimmer1.setVisibility(View.VISIBLE);
         binding.shimmer1.startShimmer();
+        binding.shimmer2.setVisibility(View.VISIBLE);
+        binding.shimmer2.startShimmer();
+
         binding.frameMain.setVisibility(View.GONE);
+        binding.frameCoffee.setVisibility(View.GONE);
+
         binding.relaCart.setVisibility(View.GONE);
 
         initRC();
 
-        callItem("");
+        callCategory();
+        callItem(subCategoryCuci);
+        callCategory2();
+        callItem2(subCategoryCaffee);
+
         binding.frameNumPad.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -302,6 +330,15 @@ public class HomeFragment extends Fragment implements ItemClickListener, ItemDel
     }
 
     private void initRC() {
+
+        listCategory = new ArrayList<DataCategory>();
+        binding.recycleCategoryCuci.setHasFixedSize(true);
+        LinearLayoutManager layoutManager1 = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
+        binding.recycleCategoryCuci.setLayoutManager(layoutManager1);
+        adapterCategoryCuci = new AdapterCategoryCuci(getActivity(), listCategory);
+        binding.recycleCategoryCuci.setAdapter(adapterCategoryCuci);
+        adapterCategoryCuci.setClickListener(this);
+
         listItem = new ArrayList<DataItem>();
         binding.recycleItem.setHasFixedSize(true);
         binding.recycleItem.setLayoutManager(new GridLayoutManager(getActivity(), numberOfColumns));
@@ -309,17 +346,87 @@ public class HomeFragment extends Fragment implements ItemClickListener, ItemDel
         binding.recycleItem.setAdapter(adapteritem);
         adapteritem.setClickListener(this);
 
-        listCart = new ArrayList<DataCart>();
+        listCategory2 = new ArrayList<DataCategory2>();
+        binding.recycleCategoryCoffee.setHasFixedSize(true);
+        LinearLayoutManager layoutManager2 = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
+        binding.recycleCategoryCoffee.setLayoutManager(layoutManager2);
+        adapterCategoryCoffee = new AdapterCategoryCoffee(getActivity(), listCategory2);
+        binding.recycleCategoryCoffee.setAdapter(adapterCategoryCoffee);
+        adapterCategoryCoffee.setCategoryCoffeListener(this);
+
+        listItem2 = new ArrayList<DataItem2>();
+        binding.recycleItemCoffee.setHasFixedSize(true);
+        binding.recycleItemCoffee.setLayoutManager(new GridLayoutManager(getActivity(), numberOfColumns));
+        adapterItem2 = new AdapterItem2(getActivity(), listItem2, HomeFragment.this);
+        binding.recycleItemCoffee.setAdapter(adapterItem2);
+        adapterItem2.setClickCoffeListener(this);
+
+        /*listCart = new ArrayList<DataCart>();
         binding.recycleCart.setHasFixedSize(true);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         binding.recycleCart.setLayoutManager(layoutManager);
         adapterCart = new AdapterCart(getActivity(), listCart);
         binding.recycleCart.setAdapter(adapterCart);
         adapterCart.setClickListener(this);
-        adapterCart.setQtyCatClickListener(this);
+        adapterCart.setQtyCatClickListener(this);*/
     }
 
-    public void callItem(final String category){
+    public void callCategory(){
+        listCategory.clear();
+        String url = NetworkState.getIp()+"getCategory.php" ;
+        RequestQueue mRequestQueue = Volley.newRequestQueue(getActivity());
+        StringRequest stringRequest = new StringRequest(Request.Method.POST,url,
+                new com.android.volley.Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Log.d("category", response);
+                        if(!response.isEmpty()){
+                            try {
+                                JSONArray jsonarray=new JSONArray(response);
+                                /*DataCategory dataItems = new DataCategory("All Category");
+                                listCategory.add(dataItems);*/
+                                for(int i=0;i<jsonarray.length();i++)
+                                {
+                                    JSONObject users = jsonarray.getJSONObject(i);
+                                    String sub_category = users.getString("sub_category");
+
+                                    DataCategory dataItem = new DataCategory(sub_category);
+                                    listCategory.add(dataItem);
+
+                                }
+                                adapterCategoryCuci.notifyDataSetChanged();
+                            } catch (JSONException e) {
+                                //showSnackBar("Koneksi ke Server Bermasalah, Silahkan Coba Lagi");
+                                Log.e("catchException",e.toString());
+                                e.printStackTrace();
+                            }
+                        }
+                        else {
+                            Log.e("error","Empty Response");
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.e("error",error.toString());
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+                //params.put("store", new SessionLogin(getActivity()).getStore() );
+                return params;
+            }
+        };
+        int socketTimeout = 30000;
+        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+        stringRequest.setRetryPolicy(policy);
+        mRequestQueue.add(stringRequest);
+    }
+
+    public void callItem(final String subCategoryCuci){
         binding.shimmer1.startShimmer();
         listItem.clear();
         String url = NetworkState.getIp()+"showItem.php" ;
@@ -332,8 +439,6 @@ public class HomeFragment extends Fragment implements ItemClickListener, ItemDel
                             binding.shimmer1.stopShimmer();
                             binding.shimmer1.setVisibility(View.GONE);
                             binding.frameMain.setVisibility(View.VISIBLE);
-                            binding.frameNumPad.setVisibility(View.GONE);
-                            binding.relaCart.setVisibility(View.VISIBLE);
                             try {
                                 JSONArray jsonarray=new JSONArray(response);
 
@@ -388,7 +493,141 @@ public class HomeFragment extends Fragment implements ItemClickListener, ItemDel
                 //String store = new SessionLogin(getActivity()).getStore();
                 Map<String, String> params = new HashMap<String, String>();
                 //params.put("store",store );
-                params.put("category",category );
+                params.put("sub_category",subCategoryCuci );
+                return params;
+            }
+        };
+        int socketTimeout = 30000;
+        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+        stringRequest.setRetryPolicy(policy);
+        mRequestQueue.add(stringRequest);
+    }
+
+    public void callCategory2(){
+        listCategory2.clear();
+        String url = NetworkState.getIp()+"getCategory2.php" ;
+        RequestQueue mRequestQueue = Volley.newRequestQueue(getActivity());
+        StringRequest stringRequest = new StringRequest(Request.Method.POST,url,
+                new com.android.volley.Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Log.d("category", response);
+                        if(!response.isEmpty()){
+                            try {
+                                JSONArray jsonarray=new JSONArray(response);
+                                /*DataCategory dataItems = new DataCategory("All Category");
+                                listCategory.add(dataItems);*/
+                                for(int i=0;i<jsonarray.length();i++)
+                                {
+                                    JSONObject users = jsonarray.getJSONObject(i);
+                                    String sub_category = users.getString("sub_category");
+
+                                    DataCategory2 dataItem = new DataCategory2(sub_category);
+                                    listCategory2.add(dataItem);
+
+                                }
+                                adapterCategoryCoffee.notifyDataSetChanged();
+                            } catch (JSONException e) {
+                                //showSnackBar("Koneksi ke Server Bermasalah, Silahkan Coba Lagi");
+                                Log.e("catchException",e.toString());
+                                e.printStackTrace();
+                            }
+                        }
+                        else {
+                            Log.e("error","Empty Response");
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.e("error",error.toString());
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+                //params.put("store", new SessionLogin(getActivity()).getStore() );
+                return params;
+            }
+        };
+        int socketTimeout = 30000;
+        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+        stringRequest.setRetryPolicy(policy);
+        mRequestQueue.add(stringRequest);
+    }
+
+    public void callItem2(final String subCategoryCaffee){
+        binding.shimmer2.startShimmer();
+        listItem2.clear();
+        String url = NetworkState.getIp()+"showItem2.php" ;
+        RequestQueue mRequestQueue = Volley.newRequestQueue(getContext());
+        StringRequest stringRequest = new StringRequest(Request.Method.POST,url,
+                new com.android.volley.Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        if(!response.isEmpty()){
+                            binding.shimmer2.stopShimmer();
+                            binding.shimmer2.setVisibility(View.GONE);
+                            binding.frameCoffee.setVisibility(View.VISIBLE);
+                            try {
+                                JSONArray jsonarray=new JSONArray(response);
+
+                                for(int i=0;i<jsonarray.length();i++)
+                                {
+                                    JSONObject users = jsonarray.getJSONObject(i);
+
+                                    String barcode = users.getString("barcode");
+                                    String name = users.getString("name");
+                                    String alias_name = users.getString("alias_name");
+                                    String category = users.getString("category");
+                                    String subCategory = users.getString("sub_category");
+                                    String gp1 = users.getString("price");
+                                    String imagURL = users.getString("imageURL");
+                                    String source = NetworkState.getIpImage()+imagURL;
+
+                                    DataItem2 dataItem = new DataItem2();
+                                    dataItem.setBarcode(barcode);
+                                    dataItem.setName(name);
+                                    dataItem.setGp1(gp1);
+                                    dataItem.setCategory(category);
+                                    dataItem.setSubCategory(subCategory);
+                                    dataItem.setAlias_name(alias_name);
+                                    dataItem.setSource(source);
+                                    listItem2.add(dataItem);
+
+                                }
+                                adapterItem2.notifyDataSetChanged();
+                            } catch (JSONException e) {
+                                Log.e("catchException",e.toString());
+                                e.printStackTrace();
+                            }
+
+
+                        }
+                        else {
+                            MyConfig.showToast(getContext(),"Koneksi Error, mencoba konek ulang");
+                            Log.e("error","Empty Response");
+                            //callSpecialPrice(category);
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.e("error",error.toString());
+                        MyConfig.showToast(getContext(),"Koneksi Error, mencoba konek ulang");
+                        //callSpecialPrice(category);
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() {
+                //String store = new SessionLogin(getActivity()).getStore();
+                Map<String, String> params = new HashMap<String, String>();
+                //params.put("store",store );
+                params.put("sub_category",subCategoryCaffee );
                 return params;
             }
         };
@@ -479,12 +718,20 @@ public class HomeFragment extends Fragment implements ItemClickListener, ItemDel
         String totCart;
         if(row.size()==0){
             totCart="0";
+            binding.cardKeranjang.setVisibility(View.GONE);
         }else{
             totCart=  String.valueOf(row.size());
+            binding.cardKeranjang.setVisibility(View.VISIBLE);
+            binding.btnLihatKeranjang.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    startActivity(new Intent(getContext(), KeranjangActivity.class));
+                }
+            });
         }
 
-        binding.textTotalCart.setText("Total Keranjang ( "+totCart+ " )");
-        for (int i=0; i<row.size();i++){
+        binding.textTotalKeranjang.setText("Total Keranjang ( "+totCart+ " )");
+        /*for (int i=0; i<row.size();i++){
             String id = row.get(i).get("id");
             String barcode = row.get(i).get("barcode");
             String name = row.get(i).get("name");
@@ -545,7 +792,6 @@ public class HomeFragment extends Fragment implements ItemClickListener, ItemDel
             }
         });
 
-
         binding.btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -580,7 +826,7 @@ public class HomeFragment extends Fragment implements ItemClickListener, ItemDel
                             .show();
                 }
             }
-        });
+        });*/
 
     }
 
@@ -674,7 +920,7 @@ public class HomeFragment extends Fragment implements ItemClickListener, ItemDel
                     sqLiteHelpers.updateData(id, nums);
                     dialog.dismiss();
                     AestheticDialog.showToaster(getActivity(), "Edit", "Sukses edit jumlah pembelian", AestheticDialog.SUCCESS);
-                    callCart();
+                    //callCart();
                 }
             }
         });
@@ -794,5 +1040,37 @@ public class HomeFragment extends Fragment implements ItemClickListener, ItemDel
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
         stringRequest.setRetryPolicy(policy);
         mRequestQueue.add(stringRequest);
+    }
+
+    @Override
+    public void onClickCategoryCoffee(View view, int position) {
+        //coffee
+        DataCategory2 dataCategory2 = listCategory2.get(position);
+        adapterCategoryCoffee.notifyDataSetChanged();
+        adapterItem2.notifyDataSetChanged();
+        binding.frameCoffee.setVisibility(View.GONE);
+        binding.shimmer2.setVisibility(View.VISIBLE);
+        binding.shimmer2.startShimmer();
+        callItem2(dataCategory2.getNamaCategory());
+    }
+
+    @Override
+    public void onClickCoffee(View view, int position) {
+        DataItem2 dataItem = listItem2.get(position);
+        viewItem(dataItem.getBarcode(), dataItem.getName(), dataItem.getGp1(), view,
+                dataItem.getSubCategory(), dataItem.getAlias_name());
+    }
+
+    @Override
+    public void onClick3(View view, int position) {
+        //cuci
+        DataCategory dataCategory = listCategory.get(position);
+        adapterCategoryCuci.notifyDataSetChanged();
+        adapteritem.notifyDataSetChanged();
+        binding.frameMain.setVisibility(View.GONE);
+        binding.shimmer1.setVisibility(View.VISIBLE);
+        binding.shimmer1.startShimmer();
+        callItem(dataCategory.getNamaCategory());
+
     }
 }
