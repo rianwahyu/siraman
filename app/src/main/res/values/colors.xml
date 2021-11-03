@@ -28,4 +28,6 @@
     <color name="gray">#808080</color>
 
     <color name="dimGray">#696969</color>
+
+    <color name="yellow">#FFC107</color>
 </resources>

@@ -211,14 +211,13 @@
                                 android:layout_height="wrap_content"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 android:text="Cetak Ulang Struk "
-                                android:backgroundTint="@color/blue"
-                                android:textColor="@color/backgroundColorWhite"
                                 android:textSize="@dimen/_12ssp"
                                 app:layout_constraintTop_toBottomOf="@+id/textTotalSales"
                                 android:id="@+id/btnReprint"
                                 android:textAllCaps="false"
                                 android:layout_margin="@dimen/_5sdp"
-                                android:padding="@dimen/_6sdp"/>
+                                android:padding="@dimen/_6sdp"
+                                style="@style/buttonStyle"/>
 
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
