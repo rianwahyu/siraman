@@ -39,21 +39,27 @@ import com.forms.sti.progresslitieigb.ProgressLoadingJIGB;
 import com.rigadev.siraman.Adapter.AdapterCart;
 import com.rigadev.siraman.Adapter.AdapterCategoryCoffee;
 import com.rigadev.siraman.Adapter.AdapterCategoryCuci;
+import com.rigadev.siraman.Adapter.AdapterCategoryPromo;
 import com.rigadev.siraman.Adapter.AdapterItem;
 import com.rigadev.siraman.Adapter.AdapterItem2;
+import com.rigadev.siraman.Adapter.AdapterItem3;
 import com.rigadev.siraman.Model.DataCart;
 import com.rigadev.siraman.Model.DataCategory;
 import com.rigadev.siraman.Model.DataCategory2;
+import com.rigadev.siraman.Model.DataCategory3;
 import com.rigadev.siraman.Model.DataItem;
 import com.rigadev.siraman.Model.DataItem2;
+import com.rigadev.siraman.Model.DataItem3;
 import com.rigadev.siraman.R;
 import com.rigadev.siraman.databinding.FragmentHomeBinding;
 import com.rigadev.siraman.ui.KeranjangActivity;
 import com.rigadev.siraman.ui.PembayaranActivity;
 import com.rigadev.siraman.util.ItemCategoryCoffeeListener;
 import com.rigadev.siraman.util.ItemCategoryListener;
+import com.rigadev.siraman.util.ItemCategoryPromoListener;
 import com.rigadev.siraman.util.ItemClickCoffeeListener;
 import com.rigadev.siraman.util.ItemClickListener;
+import com.rigadev.siraman.util.ItemClickPromoListener;
 import com.rigadev.siraman.util.ItemDeleteCartListener;
 import com.rigadev.siraman.util.ItemQtyCartListener;
 import com.rigadev.siraman.util.MyConfig;
@@ -82,21 +88,25 @@ import java.util.Map;
 import id.ionbit.ionalert.IonAlert;
 
 public class HomeFragment extends Fragment implements ItemClickListener, ItemDeleteCartListener,
-        ItemQtyCartListener, ItemCategoryListener, ItemCategoryCoffeeListener, ItemClickCoffeeListener {
+        ItemQtyCartListener, ItemCategoryListener, ItemCategoryCoffeeListener, ItemClickCoffeeListener, ItemClickPromoListener, ItemCategoryPromoListener {
 
     FragmentHomeBinding binding;
     private List<DataItem> listItem = new ArrayList<DataItem>();
     private List<DataCart> listCart = new ArrayList<DataCart>();
     private List<DataCategory> listCategory = new ArrayList<DataCategory>();
     private List<DataCategory2> listCategory2 = new ArrayList<DataCategory2>();
+    private List<DataCategory3> listCategory3 = new ArrayList<DataCategory3>();
     private List<DataItem2> listItem2 = new ArrayList<DataItem2>();
+    private List<DataItem3> listItem3 = new ArrayList<DataItem3>();
 
     AdapterItem adapteritem;
     AdapterItem2 adapterItem2;
+    AdapterItem3 adapterItem3;
     AdapterCart adapterCart;
     AdapterCategoryCuci adapterCategoryCuci;
     AdapterCategoryCoffee adapterCategoryCoffee;
-    int numberOfColumns = 4;
+    AdapterCategoryPromo adapterCategoryPromo;
+    int numberOfColumns = 3;
 
     Integer sumTotals=0;
     Integer sumItem=0;
@@ -112,6 +122,7 @@ public class HomeFragment extends Fragment implements ItemClickListener, ItemDel
     SQLiteHelpers sqLiteHelpers;
     String subCategoryCuci="";
     String subCategoryCaffee="";
+    String subCategoryPromo="";
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -132,9 +143,12 @@ public class HomeFragment extends Fragment implements ItemClickListener, ItemDel
         binding.shimmer1.startShimmer();
         binding.shimmer2.setVisibility(View.VISIBLE);
         binding.shimmer2.startShimmer();
+        binding.shimmer3.setVisibility(View.VISIBLE);
+        binding.shimmer3.startShimmer();
 
         binding.frameMain.setVisibility(View.GONE);
         binding.frameCoffee.setVisibility(View.GONE);
+        binding.framePromo.setVisibility(View.GONE);
 
         binding.relaCart.setVisibility(View.GONE);
 
@@ -144,6 +158,8 @@ public class HomeFragment extends Fragment implements ItemClickListener, ItemDel
         callItem(subCategoryCuci);
         callCategory2();
         callItem2(subCategoryCaffee);
+        callCategory3();
+        callItem3(subCategoryPromo);
 
         binding.frameNumPad.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -360,6 +376,23 @@ public class HomeFragment extends Fragment implements ItemClickListener, ItemDel
         adapterItem2 = new AdapterItem2(getActivity(), listItem2, HomeFragment.this);
         binding.recycleItemCoffee.setAdapter(adapterItem2);
         adapterItem2.setClickCoffeListener(this);
+
+        listCategory3 = new ArrayList<DataCategory3>();
+        binding.recycleCategoryPromo.setHasFixedSize(true);
+        LinearLayoutManager layoutManager3 = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
+        binding.recycleCategoryPromo.setLayoutManager(layoutManager3);
+        adapterCategoryPromo = new AdapterCategoryPromo(getActivity(), listCategory3);
+        binding.recycleCategoryPromo.setAdapter(adapterCategoryPromo);
+        adapterCategoryPromo.setCategoryPrommoListener(this);
+
+        listItem3 = new ArrayList<DataItem3>();
+        binding.recycleItemPromo.setHasFixedSize(true);
+        binding.recycleItemPromo.setLayoutManager(new GridLayoutManager(getActivity(), 2));
+        adapterItem3 = new AdapterItem3(getActivity(), listItem3, HomeFragment.this);
+        binding.recycleItemPromo.setAdapter(adapterItem3);
+        adapterItem3.setClickPromoListener(this);
+
+
 
         /*listCart = new ArrayList<DataCart>();
         binding.recycleCart.setHasFixedSize(true);
@@ -600,6 +633,140 @@ public class HomeFragment extends Fragment implements ItemClickListener, ItemDel
 
                                 }
                                 adapterItem2.notifyDataSetChanged();
+                            } catch (JSONException e) {
+                                Log.e("catchException",e.toString());
+                                e.printStackTrace();
+                            }
+
+
+                        }
+                        else {
+                            MyConfig.showToast(getContext(),"Koneksi Error, mencoba konek ulang");
+                            Log.e("error","Empty Response");
+                            //callSpecialPrice(category);
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.e("error",error.toString());
+                        MyConfig.showToast(getContext(),"Koneksi Error, mencoba konek ulang");
+                        //callSpecialPrice(category);
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() {
+                //String store = new SessionLogin(getActivity()).getStore();
+                Map<String, String> params = new HashMap<String, String>();
+                //params.put("store",store );
+                params.put("sub_category",subCategoryCaffee );
+                return params;
+            }
+        };
+        int socketTimeout = 30000;
+        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+        stringRequest.setRetryPolicy(policy);
+        mRequestQueue.add(stringRequest);
+    }
+
+    public void callCategory3(){
+        listCategory3.clear();
+        String url = NetworkState.getIp()+"getCategory3.php" ;
+        RequestQueue mRequestQueue = Volley.newRequestQueue(getActivity());
+        StringRequest stringRequest = new StringRequest(Request.Method.POST,url,
+                new com.android.volley.Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Log.d("category", response);
+                        if(!response.isEmpty()){
+                            try {
+                                JSONArray jsonarray=new JSONArray(response);
+                                /*DataCategory dataItems = new DataCategory("All Category");
+                                listCategory.add(dataItems);*/
+                                for(int i=0;i<jsonarray.length();i++)
+                                {
+                                    JSONObject users = jsonarray.getJSONObject(i);
+                                    String sub_category = users.getString("sub_category");
+
+                                    DataCategory3 dataItem = new DataCategory3(sub_category);
+                                    listCategory3.add(dataItem);
+
+                                }
+                                adapterCategoryCoffee.notifyDataSetChanged();
+                            } catch (JSONException e) {
+                                //showSnackBar("Koneksi ke Server Bermasalah, Silahkan Coba Lagi");
+                                Log.e("catchException",e.toString());
+                                e.printStackTrace();
+                            }
+                        }
+                        else {
+                            Log.e("error","Empty Response");
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.e("error",error.toString());
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+                //params.put("store", new SessionLogin(getActivity()).getStore() );
+                return params;
+            }
+        };
+        int socketTimeout = 30000;
+        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout, DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+        stringRequest.setRetryPolicy(policy);
+        mRequestQueue.add(stringRequest);
+    }
+
+    public void callItem3(final String subCategoryPromo){
+        binding.shimmer3.startShimmer();
+        listItem3.clear();
+        String url = NetworkState.getIp()+"showItem3.php" ;
+        RequestQueue mRequestQueue = Volley.newRequestQueue(getContext());
+        StringRequest stringRequest = new StringRequest(Request.Method.POST,url,
+                new com.android.volley.Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        if(!response.isEmpty()){
+                            binding.shimmer3.stopShimmer();
+                            binding.shimmer3.setVisibility(View.GONE);
+                            binding.framePromo.setVisibility(View.VISIBLE);
+                            try {
+                                JSONArray jsonarray=new JSONArray(response);
+
+                                for(int i=0;i<jsonarray.length();i++)
+                                {
+                                    JSONObject users = jsonarray.getJSONObject(i);
+
+                                    String barcode = users.getString("barcode");
+                                    String name = users.getString("name");
+                                    String alias_name = users.getString("alias_name");
+                                    String category = users.getString("category");
+                                    String subCategory = users.getString("sub_category");
+                                    String gp1 = users.getString("price");
+                                    String imagURL = users.getString("imageURL");
+                                    String source = NetworkState.getIpImage()+imagURL;
+
+                                    DataItem3 dataItem = new DataItem3();
+                                    dataItem.setBarcode(barcode);
+                                    dataItem.setName(name);
+                                    dataItem.setGp1(gp1);
+                                    dataItem.setCategory(category);
+                                    dataItem.setSubCategory(subCategory);
+                                    dataItem.setAlias_name(alias_name);
+                                    dataItem.setSource(source);
+                                    listItem3.add(dataItem);
+
+                                }
+                                adapterItem3.notifyDataSetChanged();
                             } catch (JSONException e) {
                                 Log.e("catchException",e.toString());
                                 e.printStackTrace();
@@ -1072,5 +1239,23 @@ public class HomeFragment extends Fragment implements ItemClickListener, ItemDel
         binding.shimmer1.startShimmer();
         callItem(dataCategory.getNamaCategory());
 
+    }
+
+    @Override
+    public void onClickPromo(View view, int position) {
+        DataItem3 dataItem = listItem3.get(position);
+        viewItem(dataItem.getBarcode(), dataItem.getName(), dataItem.getGp1(), view,
+                dataItem.getSubCategory(), dataItem.getAlias_name());
+    }
+
+    @Override
+    public void onClickCategoryPromo(View view, int position) {
+        DataCategory3 dataCategory2 = listCategory3.get(position);
+        adapterCategoryPromo.notifyDataSetChanged();
+        adapterItem3.notifyDataSetChanged();
+        binding.framePromo.setVisibility(View.GONE);
+        binding.shimmer3.setVisibility(View.VISIBLE);
+        binding.shimmer3.startShimmer();
+        callItem3(dataCategory2.getNamaCategory());
     }
 }

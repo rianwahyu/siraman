@@ -38,7 +38,7 @@
             android:layout_marginRight="@dimen/_3sdp"
             android:id="@+id/textNameItem"
             android:textColor="@color/black"
-            android:textSize="@dimen/_10sdp"
+            android:textSize="@dimen/_8sdp"
             android:fontFamily="@font/lato_regular"
             android:text="Nama"/>
 
@@ -81,7 +81,7 @@
             android:layout_marginBottom="5dp"
             android:id="@+id/textPriceItem"
             android:textStyle="bold"
-            android:textSize="@dimen/_10ssp"
+            android:textSize="@dimen/_9ssp"
             android:fontFamily="@font/lato_regular"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
