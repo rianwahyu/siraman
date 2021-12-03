@@ -9,6 +9,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -23,6 +24,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.dantsu.escposprinter.connection.bluetooth.BluetoothConnection;
 import com.dantsu.escposprinter.connection.bluetooth.BluetoothPrintersConnections;
+import com.dantsu.escposprinter.textparser.PrinterTextParserImg;
 import com.rigadev.siraman.Adapter.AdapterCartList;
 import com.rigadev.siraman.HomeActivity;
 import com.rigadev.siraman.Model.DataCart;
@@ -226,6 +228,7 @@ public class PembayaranActivity extends AppCompatActivity {
 
         textPrint = textPrint + "[C]<font size='big'>Cafe</font>\n" +
                 "[C]<font size='big'>Siraman</font>\n\n" +
+                "[C]<img>" + PrinterTextParserImg.bitmapToHexadecimalString(printer, this.getApplicationContext().getResources().getDrawableForDensity(R.drawable.logo_hitam, DisplayMetrics.DENSITY_MEDIUM))+"</img>\n" +
                 "[C]<font size='normal'>Car Wash & Caffee</font>\n"+
                 "[C]<font size='normal'>Struk Pembayaran</font>\n\n\n"+
                 "[L]<font size='normal'>Invoice : "+invoice+"</font>\n"+
@@ -248,7 +251,9 @@ public class PembayaranActivity extends AppCompatActivity {
                 "[L]Dibayarkan[R]"+MyConfig.formatNumberComma(paidValue)+"\n" +
                 "[L]Kembalian[R]"+MyConfig.formatNumberComma(returnPays)+"\n\n" +
 
-                "[C]<font size='normal'>Terima Kasih telah berkunjung</font>\n\n" +
+                "[C]<font size='normal'>Terima Kasih telah berkunjung</font>\n" +
+                "[C]<font size='normal'>Jl AH Nasution Lampung Timur \n</font>\n" +
+                "[C]<font size='normal'>Promo Desember : Kumpulkan 10 nota gratis (cuci/kopi).</font>\n\n\n" +
                 "[L]<font size='normal'>Develop By : Rigadev</font>\n" +
                 "[L]\n" ;
 

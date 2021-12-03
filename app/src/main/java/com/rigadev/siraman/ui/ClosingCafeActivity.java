@@ -9,6 +9,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -23,6 +24,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.dantsu.escposprinter.connection.bluetooth.BluetoothConnection;
 import com.dantsu.escposprinter.connection.bluetooth.BluetoothPrintersConnections;
+import com.dantsu.escposprinter.textparser.PrinterTextParserImg;
 import com.rigadev.siraman.Adapter.AdapterCartList;
 import com.rigadev.siraman.LoginActivity;
 import com.rigadev.siraman.Model.DataCart;
@@ -215,6 +217,7 @@ public class ClosingCafeActivity extends AppCompatActivity {
 
         textPrint = textPrint + "[C]<font size='big'>Cafe</font>\n" +
                 "[C]<font size='big'>Siraman</font>\n\n" +
+                "[C]<img>" + PrinterTextParserImg.bitmapToHexadecimalString(printer, this.getApplicationContext().getResources().getDrawableForDensity(R.drawable.logo_hitam, DisplayMetrics.DENSITY_MEDIUM))+"</img>\n" +
                 "[C]<font size='normal'>Car Wash & Caffee</font>\n\n\n"+
 
                 "[L]<font size='normal'>Kasir : "+new SessionLogin(context).getUsername()+"</font>\n"+
@@ -235,6 +238,8 @@ public class ClosingCafeActivity extends AppCompatActivity {
         textPrint = textPrint + "[L]==============================\n "+
                 "[L].[R]\n" +
                 "[L]Total[R]"+MyConfig.formatNumberComma(String.valueOf(sumTotals2))+"\n" +
+                "[C]<font size='normal'>Jl AH Nasution Lampung Timur</font>\n" +
+                "[C]<font size='normal'>Promo Desember : Kumpulkan 10 nota gratis (cuci/kopi).</font>\n\n\n" +
                 "[L]<font size='normal'>Develop By : Rigadev</font>\n" +
                 "[L]\n" ;
 
