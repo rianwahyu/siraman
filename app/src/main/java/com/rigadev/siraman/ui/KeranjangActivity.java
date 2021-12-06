@@ -250,6 +250,23 @@ public class KeranjangActivity extends AppCompatActivity implements ItemDeleteCa
             @Override
             public void afterTextChanged(Editable s) {
                 binding.etPaid.removeTextChangedListener(this);
+
+                int d;
+
+                try {
+                    String a = MyConfig.formatNumberComma(String.valueOf(s));
+                    binding.etPaid.setText(a);
+                    binding.etPaid.setSelection(binding.etPaid.getText().length());
+
+                    countPays(binding.etPaid.getText().toString(), sumTotals);
+
+                }catch (NumberFormatException e){
+                    e.printStackTrace();
+                }
+
+
+                binding.etPaid.addTextChangedListener(this);
+                /*binding.etPaid.removeTextChangedListener(this);
                 Integer d;
                 NumberFormat format = NumberFormat.getInstance(Locale.US);
                 Number number = null;
@@ -274,7 +291,7 @@ public class KeranjangActivity extends AppCompatActivity implements ItemDeleteCa
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
-                binding.etPaid.addTextChangedListener(this);
+                binding.etPaid.addTextChangedListener(this);*/
             }
         });
 
@@ -287,6 +304,34 @@ public class KeranjangActivity extends AppCompatActivity implements ItemDeleteCa
         adapterCart.setClickListener(this);
         adapterCart.setQtyCatClickListener(this);
 
+    }
+
+    void countPays(String bayar, int sumTotals){
+        NumberFormat format = NumberFormat.getInstance(Locale.US);
+        Number numberBayar = null;
+//        Number numberQty = null;
+
+        try {
+            numberBayar = format.parse(bayar);
+        }catch (ParseException e){
+            e.printStackTrace();
+        }
+
+        if (numberBayar == null){
+            dibayar =0;
+        }else{
+            dibayar = numberBayar.intValue();
+        }
+
+        returnPay = dibayar - sumTotals;
+
+        if (returnPay >=0){
+            String returnPayString = String.valueOf(returnPay);
+            binding.textReturn.setText(MyConfig.formatNumberComma(returnPayString));
+        }else{
+            //MyConfig.showToast(context, "Jumlah pembayaran tidak boleh kurang dari total bayar");
+            binding.textReturn.setText("-");
+        }
     }
 
     public void callCart() {

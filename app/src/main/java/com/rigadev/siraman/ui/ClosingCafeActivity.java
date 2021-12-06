@@ -215,9 +215,10 @@ public class ClosingCafeActivity extends AppCompatActivity {
         SimpleDateFormat format = new SimpleDateFormat("'on' yyyy-MM-dd 'at' HH:mm:ss");
         AsyncEscPosPrinter printer = new AsyncEscPosPrinter(printerConnection, 203, 48f, 32);
 
-        textPrint = textPrint + "[C]<font size='big'>Cafe</font>\n" +
-                "[C]<font size='big'>Siraman</font>\n\n" +
+        textPrint = textPrint +
+
                 "[C]<img>" + PrinterTextParserImg.bitmapToHexadecimalString(printer, this.getApplicationContext().getResources().getDrawableForDensity(R.drawable.logo_hitam, DisplayMetrics.DENSITY_MEDIUM))+"</img>\n" +
+                "[C]<font size='normal'>Siraman</font>\n"+
                 "[C]<font size='normal'>Car Wash & Caffee</font>\n\n\n"+
 
                 "[L]<font size='normal'>Kasir : "+new SessionLogin(context).getUsername()+"</font>\n"+

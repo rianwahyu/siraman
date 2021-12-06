@@ -226,9 +226,19 @@ public class PembayaranActivity extends AppCompatActivity {
         SimpleDateFormat format = new SimpleDateFormat("'on' yyyy-MM-dd 'at' HH:mm:ss");
         AsyncEscPosPrinter printer = new AsyncEscPosPrinter(printerConnection, 203, 48f, 32);
 
-        textPrint = textPrint + "[C]<font size='big'>Cafe</font>\n" +
+        /*textPrint = textPrint + "[C]<font size='big'>Cafe</font>\n" +
                 "[C]<font size='big'>Siraman</font>\n\n" +
                 "[C]<img>" + PrinterTextParserImg.bitmapToHexadecimalString(printer, this.getApplicationContext().getResources().getDrawableForDensity(R.drawable.logo_hitam, DisplayMetrics.DENSITY_MEDIUM))+"</img>\n" +
+                "[C]<font size='normal'>Car Wash & Caffee</font>\n"+
+                "[C]<font size='normal'>Struk Pembayaran</font>\n\n\n"+
+                "[L]<font size='normal'>Invoice : "+invoice+"</font>\n"+
+                "[L]<font size='normal'>Kasir : "+username+"</font>\n"+
+                "[C]<u type='double'>" + format.format(new Date()) + "</u>\n" +
+                "[C]================================\n" ;*/
+
+        textPrint = textPrint +
+                "[C]<img>" + PrinterTextParserImg.bitmapToHexadecimalString(printer, this.getApplicationContext().getResources().getDrawableForDensity(R.drawable.logo_hitam, DisplayMetrics.DENSITY_MEDIUM))+"</img>\n" +
+                "[C]<font size='normal'>Siraman</font>\n"+
                 "[C]<font size='normal'>Car Wash & Caffee</font>\n"+
                 "[C]<font size='normal'>Struk Pembayaran</font>\n\n\n"+
                 "[L]<font size='normal'>Invoice : "+invoice+"</font>\n"+
